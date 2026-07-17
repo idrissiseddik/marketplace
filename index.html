@@ -697,9 +697,7 @@
             font-size: 0.9rem;
         }
 
-        /* ========================================== */
-        /* MODALE CONTACT                            */
-        /* ========================================== */
+        /* ---------- MODALE CONTACT ---------- */
         .contact-modal {
             display: none;
             position: fixed;
@@ -979,9 +977,7 @@
             box-shadow: 0 12px 35px rgba(220, 53, 69, 0.4);
         }
 
-        /* ========================================== */
-        /* PANEL ADMIN AVEC FILTRES                   */
-        /* ========================================== */
+        /* ---------- ADMIN PANEL ---------- */
         .admin-panel {
             display: none;
         }
@@ -1087,15 +1083,6 @@
         }
         .admin-filters .btn-filter i {
             font-size: 0.8rem;
-        }
-        .admin-filters .btn-filter .badge-count {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0px 8px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-        }
-        .admin-filters .btn-filter.active .badge-count {
-            background: rgba(255, 255, 255, 0.25);
         }
 
         #admin-ads-container {
@@ -1633,6 +1620,7 @@
 
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 480px) {
+            /* ... styles mobiles ... */
             .landing-title {
                 font-size: 2rem;
             }
@@ -1835,7 +1823,6 @@
                 padding: 10px 14px;
             }
 
-            /* Admin mobile */
             .admin-header {
                 padding: 16px 16px;
                 flex-direction: column;
@@ -1951,6 +1938,7 @@
         }
 
         @media (min-width: 481px) and (max-width: 768px) {
+            /* ... styles tablettes ... */
             .ads-view-header {
                 padding: 16px 16px;
                 flex-direction: column;
@@ -2023,7 +2011,6 @@
                 padding: 14px 18px;
             }
 
-            /* Admin tablet */
             .admin-header {
                 padding: 16px 20px;
             }
@@ -2249,11 +2236,8 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- PANNEAU ADMIN AVEC FILTRES                 -->
-        <!-- ========================================== -->
+        <!-- PANNEAU ADMIN -->
         <div id="admin-panel" class="admin-panel">
-            <!-- En-tête Admin -->
             <div class="admin-header">
                 <h2><i class="fas fa-user-shield"></i> Panneau Admin</h2>
                 <div class="admin-stats">
@@ -2269,10 +2253,8 @@
                 </div>
             </div>
 
-            <!-- Filtres Admin -->
             <div class="admin-filters" id="admin-filters">
                 <span class="filter-label"><i class="fas fa-sliders-h"></i> Filtres :</span>
-
                 <select id="admin-filter-category" onchange="applyAdminFilters()">
                     <option value="">📋 Toutes catégories</option>
                     <option value="Véhicules">🚗 Véhicules</option>
@@ -2359,7 +2341,6 @@
                 </button>
             </div>
 
-            <!-- Liste des annonces admin -->
             <div id="admin-ads-container">
                 <div class="loading"><i class="fas fa-spinner fa-spin"></i> Chargement...</div>
             </div>
@@ -2597,9 +2578,12 @@
     <!-- JAVASCRIPT                                 -->
     <!-- ========================================== -->
     <script>
-        // ==========================================
+        // ============================================================
         // CONFIGURATION
-        // ==========================================
+        // ============================================================
+        // ⚠️ REMPLACEZ AVEC L'URL DE VOTRE SCRIPT APRÈS DÉPLOIEMENT
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9d9864O47r1Lf_8Y8QLiIUoyf4C2GKQDvVP7EkL0UbDJpjRPeHDMe515_FCa84lOR/exec";
+
         const ADMIN_PASSWORD = "Seddik";
         const STORAGE_KEY = 'marketplace_ads';
         const WHATSAPP_ADMIN = "212608975435";
@@ -2611,7 +2595,6 @@
         let currentFilteredAds = [];
         let currentQuickFilter = 'all';
 
-        // Variables pour les filtres admin
         let adminAllAds = [];
         let adminFilteredAds = [];
 
@@ -2639,9 +2622,9 @@
             'Autre': '📦'
         };
 
-        // ==========================================
+        // ============================================================
         // FONCTIONS UTILITAIRES POUR LES ALERTES
-        // ==========================================
+        // ============================================================
         function showErrorAlert(message) {
             return Swal.fire({
                 icon: 'error',
@@ -2691,9 +2674,9 @@
             });
         }
 
-        // ==========================================
-        // VALIDATION DES CHAMPS AVEC ICÔNE OK
-        // ==========================================
+        // ============================================================
+        // VALIDATION DES CHAMPS
+        // ============================================================
         function validateFieldWithIcon(element, iconId) {
             if (!element) return true;
             const icon = document.getElementById(iconId);
@@ -2770,66 +2753,36 @@
             return isValid;
         }
 
-        // ==========================================
-        // DONNÉES INITIALES
-        // ==========================================
+        // ============================================================
+        // DONNÉES DE DÉMONSTRATION
+        // ============================================================
         function getDefaultAds() {
             return [{
                 Id: "default1",
                 Titre: "iPhone 13 Pro Max 256GB",
                 Categorie: "Électronique",
                 Ville: "Casablanca",
-                Description: "Excellent état, batterie à 92%, avec chargeur et étui. Téléphone comme neuf, vendu avec sa boîte d'origine et tous les accessoires. Acheté chez Orange il y a 6 mois. Jamais tombé, écran parfait. Prix non négociable.",
+                Description: "Excellent état, batterie à 92%, avec chargeur et étui. Téléphone comme neuf, vendu avec sa boîte d'origine et tous les accessoires.",
                 Prix: "6500",
                 Contact: "0612345678",
-                ImageUrls: "https://via.placeholder.com/800x500/667eea/fff?text=iPhone+13+Pro+Max | https://via.placeholder.com/800x500/f4b400/fff?text=iPhone+13+Pro+Max+2 | https://via.placeholder.com/800x500/28a745/fff?text=iPhone+13+Pro+Max+3",
+                ImageUrls: "https://via.placeholder.com/800x500/667eea/fff?text=iPhone+13+Pro+Max | https://via.placeholder.com/800x500/f4b400/fff?text=iPhone+13+Pro+Max+2",
                 DateCreation: new Date().toISOString()
             }, {
                 Id: "default2",
                 Titre: "Appartement 2 pièces à vendre",
                 Categorie: "Immobilier",
                 Ville: "Rabat",
-                Description: "Appartement lumineux, proche du tramway, 65m², cuisine équipée. Situation idéale à Rabat, proche de toutes les commodités. Immeuble récent avec ascenseur. Balcon orienté sud. Parfait pour un couple ou un étudiant. Visite possible sur rendez-vous.",
+                Description: "Appartement lumineux, proche du tramway, 65m², cuisine équipée.",
                 Prix: "450000",
                 Contact: "0654321098",
-                ImageUrls: "https://via.placeholder.com/800x500/28a745/fff?text=Appartement | https://via.placeholder.com/800x500/17a2b8/fff?text=Appartement+2",
+                ImageUrls: "https://via.placeholder.com/800x500/28a745/fff?text=Appartement",
                 DateCreation: new Date(Date.now() - 86400000).toISOString()
-            }, {
-                Id: "default3",
-                Titre: "Peugeot 208 2022",
-                Categorie: "Véhicules",
-                Ville: "Marrakech",
-                Description: "Peugeot 208 essence, 15 000 km, première main, garantie. Voiture en parfait état, révisée chez Peugeot. Boîte automatique, clim, GPS, sièges en cuir. Très économique, consommation 5L/100km. Prix négociable selon visite.",
-                Prix: "145000",
-                Contact: "0678912345",
-                ImageUrls: "https://via.placeholder.com/800x500/f4b400/fff?text=Peugeot+208 | https://via.placeholder.com/800x500/dc3545/fff?text=Peugeot+208+2",
-                DateCreation: new Date(Date.now() - 172800000).toISOString()
-            }, {
-                Id: "default4",
-                Titre: "Canapé en cuir 3 places",
-                Categorie: "Meubles",
-                Ville: "Tanger",
-                Description: "Canapé en cuir noir, comme neuf, livraison possible. Modèle contemporain avec 3 places, très confortable. Cuir de qualité supérieure, facile à entretenir. Acheté chez Ikea il y a 1 an. Parfait état, aucun signe d'usure.",
-                Prix: "3200",
-                Contact: "0611122233",
-                ImageUrls: "https://via.placeholder.com/800x500/dc3545/fff?text=Canapé",
-                DateCreation: new Date(Date.now() - 259200000).toISOString()
-            }, {
-                Id: "default5",
-                Titre: "Cours de soutien en mathématiques",
-                Categorie: "Services",
-                Ville: "Fès",
-                Description: "Professeur expérimenté donne cours de maths du collège au lycée. Plus de 10 ans d'expérience dans l'enseignement. Méthode pédagogique adaptée à chaque élève. Préparation aux examens et soutien scolaire. Cours à domicile ou en ligne selon votre préférence.",
-                Prix: "200",
-                Contact: "0644556677",
-                ImageUrls: "https://via.placeholder.com/800x500/17a2b8/fff?text=Cours",
-                DateCreation: new Date(Date.now() - 345600000).toISOString()
             }];
         }
 
-        // ==========================================
+        // ============================================================
         // STOCKAGE LOCAL
-        // ==========================================
+        // ============================================================
         function loadFromStorage() {
             try {
                 const data = localStorage.getItem(STORAGE_KEY);
@@ -2860,9 +2813,72 @@
             }
         }
 
-        // ==========================================
+        // ============================================================
+        // INITIALISATION
+        // ============================================================
+        async function initializeApp() {
+            try {
+                const response = await fetch(`${APPS_SCRIPT_URL}?action=init&t=${Date.now()}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.success) {
+                    await showSuccessAlert(result.message);
+                    return true;
+                } else {
+                    await showWarningAlert('⚠️ ' + (result.error || 'Erreur d\'initialisation'));
+                    return false;
+                }
+            } catch (error) {
+                console.warn('Erreur d\'initialisation:', error);
+                await showWarningAlert('📱 Impossible de contacter le serveur. Mode hors-ligne activé.');
+                return false;
+            }
+        }
+
+        // ============================================================
+        // SYNC AVEC GOOGLE SHEETS
+        // ============================================================
+        async function syncWithGoogleSheets() {
+            try {
+                const response = await fetch(`${APPS_SCRIPT_URL}?action=getAds&t=${Date.now()}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+
+                if (result.success && result.ads && result.ads.length > 0) {
+                    saveToStorage(result.ads);
+                    return result.ads;
+                } else {
+                    return null;
+                }
+            } catch (error) {
+                console.warn('Erreur de synchronisation avec Google Sheets:', error);
+                return null;
+            }
+        }
+
+        // ============================================================
         // LANDING PAGE
-        // ==========================================
+        // ============================================================
         function enterSite() {
             const landing = document.getElementById('landing-page');
             landing.classList.add('hide');
@@ -2873,18 +2889,49 @@
             loadAds();
         }
 
-        // ==========================================
+        // ============================================================
         // CHARGEMENT DES ANNONCES
-        // ==========================================
-        function loadAds() {
-            allAds = loadFromStorage();
-            adminAllAds = [...allAds];
-            showMainView();
+        // ============================================================
+        async function loadAds() {
+            const container = document.getElementById('ads-container');
+            container.innerHTML =
+                '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Synchronisation avec Google Sheets...</div>';
+
+            // 1. Essayer d'initialiser l'application
+            await initializeApp();
+
+            // 2. Essayer de charger depuis Google Sheets
+            const googleAds = await syncWithGoogleSheets();
+
+            if (googleAds) {
+                allAds = googleAds;
+                adminAllAds = [...allAds];
+                showMainView();
+                displayAds(allAds);
+                await showSuccessAlert('✅ Données synchronisées avec Google Sheets !');
+            } else {
+                // 3. Sinon, charger depuis localStorage ou données de démonstration
+                allAds = loadFromStorage();
+                adminAllAds = [...allAds];
+                showMainView();
+
+                if (allAds.length === 0) {
+                    // 4. Si aucun localStorage, charger les données par défaut
+                    const defaults = getDefaultAds();
+                    saveToStorage(defaults);
+                    allAds = defaults;
+                    adminAllAds = [...allAds];
+                    await showWarningAlert('📱 Mode hors-ligne - Données de démonstration chargées.');
+                } else {
+                    await showWarningAlert('📱 Mode hors-ligne - Données locales chargées.');
+                }
+                displayAds(allAds);
+            }
         }
 
-        // ==========================================
+        // ============================================================
         // NAVIGATION
-        // ==========================================
+        // ============================================================
         function showMainView() {
             document.getElementById('main-view').classList.remove('hidden');
             document.getElementById('ads-view').classList.remove('active');
@@ -2922,9 +2969,9 @@
             document.getElementById('filter-city').value = '';
         }
 
-        // ==========================================
+        // ============================================================
         // FILTRES ET TRI
-        // ==========================================
+        // ============================================================
         function applyFilterAndDisplay() {
             let ads = [...currentFilteredAds];
 
@@ -2955,9 +3002,9 @@
             applyFilterAndDisplay();
         }
 
-        // ==========================================
+        // ============================================================
         // AFFICHAGE DES ANNONCES
-        // ==========================================
+        // ============================================================
         function displayAdsInView(ads) {
             const container = document.getElementById('ads-container');
             container.innerHTML = '';
@@ -3015,9 +3062,9 @@
             });
         }
 
-        // ==========================================
+        // ============================================================
         // CHANGEMENT DE VUE
-        // ==========================================
+        // ============================================================
         function toggleView(mode) {
             currentViewMode = mode;
             document.querySelectorAll('.view-options button').forEach(btn => {
@@ -3027,9 +3074,9 @@
             applyFilterAndDisplay();
         }
 
-        // ==========================================
+        // ============================================================
         // SÉLECTION DE CATÉGORIE
-        // ==========================================
+        // ============================================================
         function selectCategory(category) {
             document.getElementById('filter-category').value = category;
             showCategoryAds();
@@ -3064,9 +3111,9 @@
             showAdsView(title, filtered);
         }
 
-        // ==========================================
+        // ============================================================
         // MODAL CONTACT
-        // ==========================================
+        // ============================================================
         function openContactModal() {
             document.getElementById('contact-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -3197,9 +3244,9 @@ ${message.value.trim()}
             }, 500);
         }
 
-        // ==========================================
+        // ============================================================
         // MODAL ANNONCE
-        // ==========================================
+        // ============================================================
         function openAdModal(adId) {
             const ad = allAds.find(a => a.Id === adId);
             if (!ad) return;
@@ -3272,9 +3319,9 @@ ${message.value.trim()}
             document.body.style.overflow = '';
         }
 
-        // ==========================================
+        // ============================================================
         // CAROUSEL
-        // ==========================================
+        // ============================================================
         function changeCarousel(direction) {
             if (currentCarouselImages.length <= 1) return;
             currentCarouselIndex = (currentCarouselIndex + direction + currentCarouselImages.length) % currentCarouselImages.length;
@@ -3311,9 +3358,9 @@ ${message.value.trim()}
             }
         });
 
-        // ==========================================
+        // ============================================================
         // PUBLICATION
-        // ==========================================
+        // ============================================================
         async function submitAd(form) {
             const titre = document.getElementById('pub-titre');
             const categorie = document.getElementById('pub-categorie');
@@ -3337,15 +3384,13 @@ ${message.value.trim()}
 
             const formData = new FormData(form);
             const newAd = {
-                Id: 'ad_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
                 Titre: formData.get('titre'),
                 Categorie: formData.get('categorie'),
                 Ville: formData.get('ville'),
                 Description: formData.get('description'),
                 Prix: formData.get('prix'),
                 Contact: formData.get('contact'),
-                ImageUrls: '',
-                DateCreation: new Date().toISOString()
+                images: []
             };
 
             const submitBtn = document.querySelector('#publish-modal .btn-primary[type="submit"]');
@@ -3353,7 +3398,6 @@ ${message.value.trim()}
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
 
             const inputs = form.querySelectorAll('input[type="file"]');
-            const imageUrls = [];
             for (let inp of inputs) {
                 if (inp.files.length > 0) {
                     const file = inp.files[0];
@@ -3363,18 +3407,65 @@ ${message.value.trim()}
                     }
                     try {
                         const base64 = await fileToBase64(file);
-                        imageUrls.push(base64);
+                        newAd.images.push(base64);
                     } catch (err) { console.error(err); }
                 }
             }
-            newAd.ImageUrls = imageUrls.join(' | ');
 
-            allAds = allAds.filter(ad => ad && ad.Id && ad.Titre);
-            allAds.push(newAd);
-            adminAllAds = [...allAds];
-            saveToStorage(allAds);
+            // Essayer d'envoyer à Google Sheets
+            let success = false;
+            let errorMsg = '';
 
-            await showSuccessAlert('Votre annonce a été publiée avec succès !');
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'addAd', ...newAd })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    success = true;
+                    await showSuccessAlert('✅ Annonce publiée sur Google Sheets !');
+
+                    // Recharger les annonces
+                    const googleAds = await syncWithGoogleSheets();
+                    if (googleAds) {
+                        allAds = googleAds;
+                        adminAllAds = [...allAds];
+                        displayAds(allAds);
+                    }
+                } else {
+                    errorMsg = result.error || 'Erreur inconnue';
+                }
+            } catch (error) {
+                errorMsg = error.toString();
+                console.warn('Erreur d\'envoi à Google Sheets:', error);
+            }
+
+            if (!success) {
+                // Ajouter en local
+                const localAd = {
+                    Id: 'ad_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+                    Titre: newAd.Titre,
+                    Categorie: newAd.Categorie,
+                    Ville: newAd.Ville,
+                    Description: newAd.Description,
+                    Prix: newAd.Prix,
+                    Contact: newAd.Contact,
+                    ImageUrls: newAd.images.join(' | '),
+                    DateCreation: new Date().toISOString()
+                };
+
+                allAds = allAds.filter(ad => ad && ad.Id && ad.Titre);
+                allAds.push(localAd);
+                adminAllAds = [...allAds];
+                saveToStorage(allAds);
+                displayAds(allAds);
+
+                await showWarningAlert('📱 Annonce sauvegardée localement. ' + (errorMsg ? 'Erreur: ' + errorMsg : ''));
+            }
 
             form.reset();
             closePublishModal();
@@ -3395,9 +3486,9 @@ ${message.value.trim()}
             });
         }
 
-        // ==========================================
+        // ============================================================
         // GESTION MODALS
-        // ==========================================
+        // ============================================================
         function openPublishModal() {
             document.getElementById('publish-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -3462,9 +3553,9 @@ ${message.value.trim()}
             closeAdmin();
         }
 
-        // ==========================================
+        // ============================================================
         // ADMIN AVEC FILTRES
-        // ==========================================
+        // ============================================================
         function loadAdminAds() {
             adminAllAds = [...allAds];
             applyAdminFilters();
@@ -3561,9 +3652,9 @@ ${message.value.trim()}
             }).join('');
         }
 
-        // ==========================================
+        // ============================================================
         // ADMIN - SUPPRESSION
-        // ==========================================
+        // ============================================================
         async function deleteAd(adId) {
             const confirm = await Swal.fire({
                 title: '⚠️ Supprimer cette annonce ?',
@@ -3578,17 +3669,36 @@ ${message.value.trim()}
 
             if (!confirm.isConfirmed) return;
 
+            // Supprimer localement
             allAds = allAds.filter(ad => ad && ad.Id !== adId);
             adminAllAds = [...allAds];
             saveToStorage(allAds);
+
+            // Essayer de supprimer de Google Sheets aussi
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'deleteAd', id: adId })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    await showSuccessAlert('🗑️ Annonce supprimée de Google Sheets !');
+                } else {
+                    await showWarningAlert('🗑️ Annonce supprimée localement.');
+                }
+            } catch (error) {
+                console.warn('Erreur de suppression sur Google Sheets:', error);
+                await showWarningAlert('🗑️ Annonce supprimée localement.');
+            }
 
             loadAdminAds();
 
             if (document.getElementById('ads-view').classList.contains('active')) {
                 showCategoryAds();
+            } else {
+                displayAds(allAds);
             }
-
-            await showSuccessAlert('L\'annonce a été supprimée avec succès.');
         }
 
         // Fermer les modals au clic extérieur
